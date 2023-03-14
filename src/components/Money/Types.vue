@@ -1,16 +1,37 @@
 <template>
   <div>
     <ul class="types">
-      <li class="selected">支出</li>
-      <li>收入</li>
+      <li :class="type === '-' && 'selected'"
+          @click="selecType('-')">支出
+      </li>
+      <li :class="type === '+' && 'selected'"
+          @click="selecType('+')">收入
+      </li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
-  name: 'Types'
-};
+  name: 'Types',
+  props: ['xxx'],
+  data() {
+    return {
+      type: '-' // '-'表示支出, '+'表示收入
+    }
+  },
+  mounted() {
+    console.log(this.xxx)
+  },
+  methods: {
+    selecType(type) { // type 只能是‘-’ 和 ‘+’中的一个
+      if (type !== '-' && type !== '+') {
+        throw new Error('type is not know')
+      }
+      this.type = type
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

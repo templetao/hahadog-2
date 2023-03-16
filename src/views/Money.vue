@@ -34,8 +34,8 @@ type Record = {
 export default class Money extends Vue {
   tags = ['游戏', '吃饭', '买衣服', '出行'];
   recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
-  record: Record = {
-    tags: [], notes: '', type: '-', amount: 0
+  record: { amount: number; notes: string; type: string; tags: string[] } = {
+    tags: [], notes: '', type: '-', amount: 0,
   };
 
   onUpdateTags(value: string[]) {

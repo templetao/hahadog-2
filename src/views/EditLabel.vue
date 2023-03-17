@@ -19,7 +19,7 @@ export default class EditLabel extends Vue {
     if (tag) {
       console.log(tag);
     } else {
-      this.$router.replace('/404')
+      this.$router.replace('/404');
     }
   }
 }

@@ -33,6 +33,7 @@ export default class EditLabel extends Vue {
 
   created() {
     const id = this.$route.params.id;
+    store.commit('fetchTags')
     store.commit('setCurrentTag', this.$route.params.id);
     if (!this.tag) {
       this.$router.replace('/404');
@@ -41,18 +42,15 @@ export default class EditLabel extends Vue {
 
   update(name: string) {
     if (this.tag) {
-      // store.updateTag(this.tag.id, name);
+      store.commit('updateTag', {id: this.tag.id, name});
     }
   }
 
   remove() {
-    // if (this.tag) {
-    //   if (store.removeTag(this.tag.id)) {
-    //     this.$router.back();
-    //   } else {
-    //     window.alert('刪除失敗');
-    //   }
-    // }
+    if (this.tag) {
+      store.commit('removeTag', this.tag.id);
+      this.$router.back();
+    }
   }
 
   goBack() {

@@ -9,30 +9,38 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-<!--      <Button/>-->
+      <!--      <Button/>-->
       <Button class="createTag" @click="createTag">新建标签</Button>
     </div>
   </Layout>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
 import store from '@/store/index';
+import TagHelper from '@/mixins/TagHelper';
+import {mixins} from 'vue-class-component';
 
 @Component({
-  components: {Button}
-})
-export default class Labels extends Vue {
-  tags = []//store.tagList;
-
-  createTag() {
-    const name = window.prompt('请输入标签名');
-    if (name) {
-      // store.createTag(name);
+  components: {Button},
+  // mixins: [TagHelper],
+  computed: {
+    tags() {
+      return store.state.tagList;
     }
+  },
+})
+export default class Labels extends mixins(TagHelper) {
+  created() {
+    store.commit('fetchTags');
   }
+
+  // createTag() {
+  //   const name = window.prompt('请输入标签名');
+  //   if (!name) { return window.alert('标签名不能为空'); }
+  //   store.commit('createTag', name);
+  // }
 }
 </script>
 

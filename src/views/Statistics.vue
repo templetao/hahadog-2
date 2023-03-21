@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <ol>
+    <ol v-if="groupList>0">
       <li v-for="(group,index) in groupList" :key="index">
         <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
         <ol>
@@ -13,6 +13,9 @@
         </ol>
       </li>
     </ol>
+    <div v-else class="noResult">
+      目前没有相关记录
+    </div>
   </Layout>
 
 </template>
@@ -61,8 +64,9 @@ export default class Statistics extends Vue {
     return result;
   }
 
-  tagString(tags: string[]) {
-    return tags.length === 0 ? '无' : tags.join(',');
+  // eslint-disable-next-line no-undef
+  tagString(tags: Tag[]) {
+    return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
   }
 
   beautify(string: string) {
@@ -91,6 +95,10 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.noResult {
+  padding: 16px;
+  text-align: center;
+}
 ::v-deep {
   .type-tabs-item {
     background: white;

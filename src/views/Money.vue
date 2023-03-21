@@ -8,7 +8,7 @@
                 @update:value="onUpdateNotes"/>
     </div>
 
-    <Tags />
+    <Tags @update:value="record.tags = $event"/>
   </Layout>
 
 </template>

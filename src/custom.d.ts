@@ -1,9 +1,9 @@
 type RecordItem = {
-  tags: string[],
+  tags: Tag[],
   notes: string,
   type: string,
   amount: number, // 数据类型
-  createdAt: string | undefined // 类 / 构造函数
+  createdAt?: string
 }
 
 type RootState = {
